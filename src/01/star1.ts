@@ -22,7 +22,6 @@ async function timesIncreased(file: string): Promise<void> {
         prevDepth = curDepth;
         depthCount++;
     };
-
     console.log(`${depthIncreases} measurements are larger than the previous measurement.`);
 }
 
