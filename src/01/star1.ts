@@ -3,8 +3,6 @@ import * as readline from 'readline';
 
 const inputFile: string = './static/01/input';
 
-console.log('--- Day 1: Sonar Sweep ---');
-
 /* Part One: Count the number of times a depth measurement increases from the previous measurement */
 
 async function timesIncreased(file: string): Promise<void> {
@@ -31,4 +29,5 @@ async function timesIncreased(file: string): Promise<void> {
     console.log(`${depthIncreases} measurements are larger than the previous measurement.`);
 }
 
+console.log('--- Day 1: Sonar Sweep ---');
 timesIncreased(inputFile);
