@@ -1,19 +1,16 @@
 import * as fs from 'fs';
-import * as readline from 'readline';
 
 const inputFile: string = './static/01/input';
 
 /* Count the number of times the sum of measurements in this sliding window increases from the previous sum */
-async function timesSumsIncreased(file: string): Promise<void> {
-    const rl = readline.createInterface({
-        input: fs.createReadStream(file)
-    });
+function timesSumsIncreased(file: string): number {
+    const data = fs.readFileSync(file, 'utf-8').split('\n');
     let depthSumIncreases: number = 0;
     let depthCount: number = 0;
     let curDepths: [any, any, any] = [undefined, undefined, undefined];
     let curDepthSum: any = undefined;
     let prevDepthSum: any = undefined;
-    for await (const depth of rl) {
+    for (const depth of data) {
         curDepths[0] = curDepths[1];
         curDepths[1] = curDepths[2];
         curDepths[2] = Number(depth);
@@ -25,9 +22,10 @@ async function timesSumsIncreased(file: string): Promise<void> {
         }
         prevDepthSum = curDepthSum;
         depthCount++;
-    };
-    console.log(`${depthSumIncreases} sums are larger than the previous sum.`);
+    }
+    return depthSumIncreases;
 }
 
 console.log('--- Day 1: Sonar Sweep ---');
-timesSumsIncreased(inputFile);
+let increases = timesSumsIncreased(inputFile);
+console.log(`${increases} sums are larger than the previous sum.`);
