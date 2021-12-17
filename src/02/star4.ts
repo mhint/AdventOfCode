@@ -4,24 +4,26 @@ const inputFile: string = './static/02/input';
 interface Position {
     x: number;
     y: number;
+    aim: number;
 }
 
 /* Calculate the horizontal position and depth you would have after following the planned course */
 function calculatePosition(file: string): Position {
     const data = fs.readFileSync(file, 'utf-8').split('\n');
-    let pos: Position = { x: 0, y: 0 }
+    let pos: Position = { x: 0, y: 0, aim: 0 }
     for (const command of data) {
         const direction = command.split(' ')[0];
-        const distance = Number(command.split(' ')[1]);
+        const magnitude = Number(command.split(' ')[1]);
         switch (direction) {
             case 'forward':
-                pos.x += distance;
+                pos.x += magnitude;
+                pos.y += pos.aim * magnitude;
                 break;
             case 'up':
-                pos.y += distance;
+                pos.aim += magnitude;
                 break;
             case 'down':
-                pos.y -= distance;
+                pos.aim -= magnitude;
                 break;
         }
     }

@@ -2,7 +2,9 @@ import * as fs from 'fs';
 
 const inputFile: string = './static/01/input';
 
-/* Count the number of times the sum of measurements in this sliding window increases from the previous sum */
+/* Count the number of times the sum of measurements in this sliding window increases from the
+ * previous sum
+ */
 function timesSumsIncreased(file: string): number {
     const data = fs.readFileSync(file, 'utf-8').split('\n');
     let depthSumIncreases: number = 0;
